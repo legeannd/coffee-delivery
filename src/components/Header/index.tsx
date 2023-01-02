@@ -7,10 +7,12 @@ import logo from '../../assets/logo.svg'
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={logo} alt="" />
+      <NavLink to="/">
+        <img src={logo} alt="" />
+      </NavLink>
 
       <nav>
-        <NavLink to="#" className="location">
+        <NavLink to="#">
           <MapPin size={22} weight="fill" />
           <span>Porto Alegre, RS</span>
         </NavLink>
