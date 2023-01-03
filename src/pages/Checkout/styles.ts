@@ -5,6 +5,10 @@ export const CheckoutContainer = styled.main`
   display: grid;
   grid-template-columns: 1fr 28rem;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const CheckoutTitle = styled.p`
@@ -16,14 +20,14 @@ export const CheckoutTitle = styled.p`
 
 export const CompleteOrderContainer = styled.div``
 
-export const DeliveryAddressContainer = styled.div`
+export const BaseContainer = styled.div`
   background: ${(props) => props.theme['base-card']};
   border-radius: 6px;
   padding: 2.5rem;
   margin-top: 1rem;
 `
 
-export const AddressLabelContainer = styled.div`
+export const LabelContainer = styled.div`
   display: flex;
   gap: 0.5rem;
 
@@ -83,6 +87,53 @@ export const AddressInputContainer = styled.div`
       ::after {
         content: '';
       }
+    }
+  }
+`
+
+export const PaymentContainer = styled(BaseContainer)`
+  margin-top: 0.75rem;
+`
+
+export const PaymentLabelContainer = styled(LabelContainer)`
+  svg {
+    color: ${(props) => props.theme.purple};
+  }
+`
+
+export const SelectButtonsContainer = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.75rem;
+
+  button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+
+    background: ${(props) => props.theme['base-button']};
+    border: 0;
+    border-radius: 6px;
+
+    text-transform: uppercase;
+    color: ${(props) => props.theme['base-text']};
+    font-size: 0.75rem;
+    padding: 1rem 1.25rem;
+
+    svg {
+      color: ${(props) => props.theme.purple};
+    }
+
+    :hover {
+      cursor: pointer;
+      background: ${(props) => props.theme['base-hover']};
+    }
+
+    :focus {
+      background: ${(props) => props.theme['purple-light']};
+      box-shadow: 0 0 0 1px ${(props) => props.theme.purple};
     }
   }
 `
