@@ -77,10 +77,24 @@ export const HeroContainer = styled.main`
 
 export const CoffeeSelectionContainer = styled.div`
   padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
 
   h2 {
     font-family: 'Baloo 2', cursive;
+    font-size: 2.5rem 2rem;
     font-weight: 800;
     color: ${(props) => props.theme['base-subtitle']};
+  }
+
+  .selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2.5rem 2rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 `
