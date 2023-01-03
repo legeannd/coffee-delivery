@@ -6,9 +6,13 @@ export const CardContainer = styled.div`
   align-items: center;
   padding: 0 1.5rem 1.25rem;
 
+  background: ${(props) => props.theme['base-card']};
+  border-radius: 6px 36px;
+
   img {
     width: 7.5rem;
     height: 7.5rem;
+    margin-top: -1.25rem;
   }
 `
 
