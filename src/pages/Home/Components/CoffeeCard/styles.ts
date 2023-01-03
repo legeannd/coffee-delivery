@@ -87,6 +87,7 @@ export const QuantityInput = styled.div`
 
     :hover {
       cursor: pointer;
+      color: ${(props) => props.theme['purple-dark']};
     }
     :focus {
       box-shadow: 0 0 0 0px;

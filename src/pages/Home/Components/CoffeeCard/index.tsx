@@ -12,9 +12,11 @@ import {
 import traditionalCoffeeImg from '../../../../assets/traditional.png'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function CoffeeCard() {
   const [quantity, setQuantity] = useState(0)
+  const navigate = useNavigate()
 
   function handleChangeQuantity(buttonType: string) {
     if (buttonType === 'minus' && quantity > 0) {
@@ -22,6 +24,10 @@ export function CoffeeCard() {
     } else if (buttonType === 'plus') {
       setQuantity(quantity + 1)
     }
+  }
+
+  function handleNavigateToCheckout() {
+    navigate('/checkout')
   }
 
   return (
@@ -54,7 +60,7 @@ export function CoffeeCard() {
               <Plus size={14} weight="fill" />
             </button>
           </QuantityInput>
-          <AddToCartButton>
+          <AddToCartButton onClick={handleNavigateToCheckout}>
             <ShoppingCart size={22} weight="fill" />
           </AddToCartButton>
         </div>
