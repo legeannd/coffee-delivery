@@ -8,6 +8,8 @@ import coffeeImg from '../../assets/coffee.png'
 import { ShoppingCart, Package, Timer, Coffee } from 'phosphor-react'
 import { CoffeeCard } from './Components/CoffeeCard'
 
+import coffeeList from '../../assets/coffee-list.json'
+
 export function Home() {
   return (
     <HomeContainer>
@@ -54,16 +56,9 @@ export function Home() {
         <h2>Nossos cafés</h2>
 
         <div className="selection">
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+          {coffeeList.map((coffee) => (
+            <CoffeeCard key={coffee.id} coffee={coffee} />
+          ))}
         </div>
       </CoffeeSelectionContainer>
     </HomeContainer>

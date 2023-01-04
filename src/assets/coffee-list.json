@@ -51,7 +51,7 @@
     "id": "7",
     "name": "Capuccino",
     "description": "Bebida com canela feita de doses iguais de café, leite e espuma",
-    "image_name": "cappuccino.png",
+    "image_name": "capuccino.png",
     "labels": ["tradicional", "com leite"],
     "price": "9.90"
   },
@@ -67,7 +67,7 @@
     "id": "9",
     "name": "Mocaccino",
     "description": "Café expresso com calda de chocolate, pouco leite e espuma",
-    "image_name": "mocaccino.png",
+    "image_name": "mochaccino.png",
     "labels": ["tradicional", "com leite"],
     "price": "9.90"
   },

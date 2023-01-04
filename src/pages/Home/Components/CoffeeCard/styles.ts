@@ -16,6 +16,16 @@ export const CardContainer = styled.div`
   }
 `
 
+export const CoffeeTypeContainer = styled.div`
+  margin: 0.75rem 0 1rem 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+`
+
 export const CoffeeType = styled.span`
   font-weight: bold;
   font-size: 0.625rem;
@@ -25,7 +35,6 @@ export const CoffeeType = styled.span`
   border-radius: 100px;
   color: ${(props) => props.theme['yellow-dark']};
   text-transform: uppercase;
-  margin: 0.75rem 0 1rem 0;
 `
 
 export const CoffeeTitle = styled.p`

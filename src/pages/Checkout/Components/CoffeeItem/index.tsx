@@ -1,5 +1,4 @@
 import { Trash } from 'phosphor-react'
-import traditionalCoffeeImg from '../../../../assets/traditional.png'
 import { QuantityInput } from '../../../../components/QuantityInput'
 import {
   CoffeeImageAndNameContainer,
@@ -13,7 +12,7 @@ export function CoffeeItem() {
     <CoffeeItemContainer>
       <InnerPaddingContainer>
         <CoffeeImageAndNameContainer>
-          <img src={traditionalCoffeeImg} alt="" />
+          <img src={''} alt="" />
           <div className="title-align">
             <span>Expresso Tradicional</span>
             <div>
