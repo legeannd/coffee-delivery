@@ -13,6 +13,12 @@ import {
   PaymentLabelContainer,
   SelectButtonsContainer,
   CoffeeBaseContainer,
+  TotalValueContainer,
+  TotalValueRow,
+  LabelText,
+  LabelValue,
+  ConfirmOrderButton,
+  LabelTitle,
 } from './styles'
 
 export function Checkout() {
@@ -75,6 +81,21 @@ export function Checkout() {
         <CoffeeBaseContainer>
           <CoffeeItem />
           <CoffeeItem />
+          <TotalValueContainer>
+            <TotalValueRow>
+              <LabelText>Total de itens</LabelText>
+              <LabelValue>R$ 29,70</LabelValue>
+            </TotalValueRow>
+            <TotalValueRow>
+              <LabelText>Entrega</LabelText>
+              <LabelValue>R$ 3,50</LabelValue>
+            </TotalValueRow>
+            <TotalValueRow>
+              <LabelTitle>Total</LabelTitle>
+              <LabelTitle>R$ 33,20</LabelTitle>
+            </TotalValueRow>
+          </TotalValueContainer>
+          <ConfirmOrderButton>Confirmar pedido</ConfirmOrderButton>
         </CoffeeBaseContainer>
       </SelectedCoffeeContainer>
     </CheckoutContainer>

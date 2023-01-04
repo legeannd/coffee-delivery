@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const CheckoutContainer = styled.main`
   margin-top: 2.5rem;
+  margin-bottom: 2rem;
   display: grid;
   grid-template-columns: 1fr 28rem;
   gap: 2rem;
@@ -145,4 +146,48 @@ export const CoffeeBaseContainer = styled(BaseContainer)`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+`
+
+export const TotalValueContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`
+
+export const TotalValueRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const LabelText = styled.span`
+  font-size: 0.875rem;
+  line-height: 130%;
+`
+
+export const LabelValue = styled.span`
+  font-size: 1rem;
+  line-height: 130%;
+`
+
+export const LabelTitle = styled.span`
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 130%;
+`
+
+export const ConfirmOrderButton = styled.button`
+  border: 0;
+  border-radius: 6px;
+  background: ${(props) => props.theme.yellow};
+  color: ${(props) => props.theme.white};
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  padding: 0.75rem 0;
+  transition: background-color 0.2s;
+
+  :hover {
+    cursor: pointer;
+    background: ${(props) => props.theme['yellow-dark']};
+  }
 `
