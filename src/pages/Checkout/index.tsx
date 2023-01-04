@@ -1,4 +1,5 @@
 import { Bank, CreditCard, MapPin, Money } from 'phosphor-react'
+import { useNavigate } from 'react-router-dom'
 import { CoffeeItem } from './Components/CoffeeItem'
 import { Input } from './Components/Input'
 import {
@@ -22,6 +23,11 @@ import {
 } from './styles'
 
 export function Checkout() {
+  const navigate = useNavigate()
+  function handleNavigateToSuccessPage() {
+    navigate('/checkout/success')
+  }
+
   return (
     <CheckoutContainer>
       <CompleteOrderContainer>
@@ -95,7 +101,9 @@ export function Checkout() {
               <LabelTitle>R$ 33,20</LabelTitle>
             </TotalValueRow>
           </TotalValueContainer>
-          <ConfirmOrderButton>Confirmar pedido</ConfirmOrderButton>
+          <ConfirmOrderButton onClick={handleNavigateToSuccessPage}>
+            Confirmar pedido
+          </ConfirmOrderButton>
         </CoffeeBaseContainer>
       </SelectedCoffeeContainer>
     </CheckoutContainer>
