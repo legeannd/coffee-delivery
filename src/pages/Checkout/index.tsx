@@ -1,4 +1,5 @@
 import { Bank, CreditCard, MapPin, Money } from 'phosphor-react'
+import { CoffeeItem } from './Components/CoffeeItem'
 import { Input } from './Components/Input'
 import {
   LabelContainer,
@@ -11,6 +12,7 @@ import {
   PaymentContainer,
   PaymentLabelContainer,
   SelectButtonsContainer,
+  CoffeeBaseContainer,
 } from './styles'
 
 export function Checkout() {
@@ -70,6 +72,10 @@ export function Checkout() {
       </CompleteOrderContainer>
       <SelectedCoffeeContainer>
         <CheckoutTitle>Cafés selecionados</CheckoutTitle>
+        <CoffeeBaseContainer>
+          <CoffeeItem />
+          <CoffeeItem />
+        </CoffeeBaseContainer>
       </SelectedCoffeeContainer>
     </CheckoutContainer>
   )

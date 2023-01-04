@@ -139,3 +139,10 @@ export const SelectButtonsContainer = styled.div`
 `
 
 export const SelectedCoffeeContainer = styled.div``
+
+export const CoffeeBaseContainer = styled(BaseContainer)`
+  border-radius: 6px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`
