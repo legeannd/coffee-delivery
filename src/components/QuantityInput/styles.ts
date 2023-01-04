@@ -1,10 +1,17 @@
 import styled from 'styled-components'
 
-export const QuantityInputContainer = styled.div`
+interface QuantityInputProps {
+  color: 'purple' | 'default'
+}
+
+export const QuantityInputContainer = styled.div<QuantityInputProps>`
   display: flex;
   align-items: center;
   padding: 0.5rem;
-  background: ${(props) => props.theme['purple-light']};
+  background: ${(props) =>
+    props.color === 'purple'
+      ? props.theme['purple-light']
+      : props.theme['base-button']};
   border-radius: 6px;
 
   color: ${(props) => props.theme['base-text']};

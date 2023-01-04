@@ -33,7 +33,7 @@ export function CoffeeCard() {
           <span>R$ </span> 9,90
         </Price>
         <div className="options">
-          <QuantityInput />
+          <QuantityInput color="purple" />
           <AddToCartButton onClick={handleNavigateToCheckout}>
             <ShoppingCart size={22} weight="fill" />
           </AddToCartButton>
