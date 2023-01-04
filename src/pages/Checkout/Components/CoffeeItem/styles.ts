@@ -56,4 +56,9 @@ export const RemoveButton = styled.button`
   svg {
     color: ${(props) => props.theme.purple};
   }
+
+  :hover {
+    background: ${(props) => props.theme['base-hover']};
+    cursor: pointer;
+  }
 `
