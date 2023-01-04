@@ -6,25 +6,15 @@ import {
   CoffeeType,
   Price,
   PriceAndQuantityContainer,
-  QuantityInput,
 } from './styles'
 
 import traditionalCoffeeImg from '../../../../assets/traditional.png'
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { useState } from 'react'
+import { ShoppingCart } from 'phosphor-react'
 import { useNavigate } from 'react-router-dom'
+import { QuantityInput } from '../../../../components/QuantityInput'
 
 export function CoffeeCard() {
-  const [quantity, setQuantity] = useState(0)
   const navigate = useNavigate()
-
-  function handleChangeQuantity(buttonType: string) {
-    if (buttonType === 'minus' && quantity > 0) {
-      setQuantity(quantity - 1)
-    } else if (buttonType === 'plus') {
-      setQuantity(quantity + 1)
-    }
-  }
 
   function handleNavigateToCheckout() {
     navigate('/checkout')
@@ -43,23 +33,7 @@ export function CoffeeCard() {
           <span>R$ </span> 9,90
         </Price>
         <div className="options">
-          <QuantityInput>
-            <button
-              disabled={quantity === 0}
-              onClick={() => handleChangeQuantity('minus')}
-            >
-              <Minus size={14} weight="fill" />
-            </button>
-            <input
-              type="number"
-              placeholder="1"
-              id="quantity"
-              value={quantity}
-            />
-            <button onClick={() => handleChangeQuantity('plus')}>
-              <Plus size={14} weight="fill" />
-            </button>
-          </QuantityInput>
+          <QuantityInput />
           <AddToCartButton onClick={handleNavigateToCheckout}>
             <ShoppingCart size={22} weight="fill" />
           </AddToCartButton>
