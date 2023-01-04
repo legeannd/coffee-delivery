@@ -10,8 +10,9 @@ import {
 } from './styles'
 
 import { ShoppingCart } from 'phosphor-react'
-import { useNavigate } from 'react-router-dom'
 import { QuantityInput } from '../../../../components/QuantityInput'
+import { useContext, useState } from 'react'
+import { CartContext } from '../../../../contexts/CartContext'
 
 interface CoffeeProps {
   id: string
@@ -27,13 +28,23 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const navigate = useNavigate()
-
-  function handleNavigateToCheckout() {
-    navigate('/checkout')
-  }
+  const [quantity, setQuantity] = useState(0)
+  const { addItemToCart } = useContext(CartContext)
 
   const image = `/assets/coffees/${coffee.image_name}`
+
+  function handleSetQuantity(quantity: number) {
+    setQuantity(quantity)
+  }
+
+  function handleAddItemToCart() {
+    const item = {
+      id: coffee.id,
+      amount: quantity,
+    }
+
+    addItemToCart(item)
+  }
 
   return (
     <CardContainer>
@@ -50,8 +61,15 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
           <span>R$ </span> {coffee.price.replace('.', ',')}
         </Price>
         <div className="options">
-          <QuantityInput color="purple" />
-          <AddToCartButton onClick={handleNavigateToCheckout}>
+          <QuantityInput
+            quantity={quantity}
+            setQuantity={handleSetQuantity}
+            color="purple"
+          />
+          <AddToCartButton
+            disabled={quantity === 0}
+            onClick={handleAddItemToCart}
+          >
             <ShoppingCart size={22} weight="fill" />
           </AddToCartButton>
         </div>

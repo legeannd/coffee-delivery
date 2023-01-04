@@ -94,12 +94,16 @@ export const AddToCartButton = styled.button`
   border-radius: 6px;
   transition: background-color 0.2s;
 
-  :hover {
+  :hover:not(:disabled) {
     cursor: pointer;
     background-color: ${(props) => props.theme.purple};
   }
 
-  :focus {
+  :focus:not(:disabled) {
     box-shadow: 0 0 0 2px ${(props) => props.theme['purple-dark']};
+  }
+
+  :disabled {
+    cursor: not-allowed;
   }
 `

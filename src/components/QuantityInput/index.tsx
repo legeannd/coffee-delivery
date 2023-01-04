@@ -1,14 +1,17 @@
 import { Minus, Plus } from 'phosphor-react'
-import { useState } from 'react'
 import { QuantityInputContainer } from './styles'
 
 interface QuantityInputProps {
   color?: 'purple' | 'default'
+  quantity: number
+  setQuantity: (value: number) => void
 }
 
-export function QuantityInput({ color = 'default' }: QuantityInputProps) {
-  const [quantity, setQuantity] = useState(0)
-
+export function QuantityInput({
+  color = 'default',
+  quantity = 0,
+  setQuantity,
+}: QuantityInputProps) {
   function handleChangeQuantity(buttonType: string) {
     if (buttonType === 'minus' && quantity > 0) {
       setQuantity(quantity - 1)
