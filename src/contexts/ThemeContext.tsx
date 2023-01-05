@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyle } from '../styles/global'
 import { darkTheme } from '../styles/themes/dark'
@@ -18,7 +18,17 @@ interface ThemeContextProviderProps {
 }
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
-  const [theme, setTheme] = useState<ThemeType>('light')
+  const [theme, setTheme] = useState<ThemeType>(() => {
+    const storedStateAsJSON = localStorage.getItem(
+      '@coffee-delivery:theme-state-1.0.0',
+    )
+
+    if (storedStateAsJSON) {
+      return JSON.parse(storedStateAsJSON)
+    }
+
+    return 'light'
+  })
 
   function switchTheme(): void {
     if (theme === 'light') {
@@ -27,6 +37,12 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
       setTheme('light')
     }
   }
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(theme)
+
+    localStorage.setItem('@coffee-delivery:theme-state-1.0.0', stateJSON)
+  }, [theme])
 
   const currentTheme = theme === 'light' ? lightTheme : darkTheme
 
