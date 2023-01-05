@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.header`
+interface HeaderContainerProps {
+  cartItemsAmount: number
+}
+
+export const HeaderContainer = styled.header<HeaderContainerProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,6 +29,26 @@ export const HeaderContainer = styled.header`
       &.cart {
         background: ${(props) => props.theme['yellow-light']};
         color: ${(props) => props.theme['yellow-dark']};
+
+        position: relative;
+
+        ::after {
+          content: '${(props) => props.cartItemsAmount}';
+          font-weight: 700;
+          font-size: 0.75rem;
+          display: ${(props) =>
+            props.cartItemsAmount === 0 ? 'none' : 'flex'};
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          width: 1.25rem;
+          height: 1.25rem;
+          border-radius: 50%;
+          color: ${(props) => props.theme.white};
+          background: ${(props) => props.theme['yellow-dark']};
+          top: -0.5rem;
+          right: -0.5rem;
+        }
       }
     }
   }
