@@ -2,7 +2,7 @@ import { createContext, ReactNode, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyle } from '../styles/global'
 import { darkTheme } from '../styles/themes/dark'
-import { defaultTheme } from '../styles/themes/light'
+import { lightTheme } from '../styles/themes/light'
 
 interface ThemeContextType {
   theme: 'dark' | 'light'
@@ -28,7 +28,7 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
     }
   }
 
-  const currentTheme = theme === 'light' ? defaultTheme : darkTheme
+  const currentTheme = theme === 'light' ? lightTheme : darkTheme
 
   return (
     <ThemeContext.Provider
