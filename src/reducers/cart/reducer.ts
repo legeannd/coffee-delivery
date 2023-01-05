@@ -39,6 +39,19 @@ export function cartReducer(state: CartState, action: any) {
         }
       })
     }
+    case ActionTypes.REPLACE_ITEM_QUANTITY_FROM_CART: {
+      const cartItemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.item.id,
+      )
+      return produce(state, (draft) => {
+        if (action.payload.item.amount <= 0) {
+          draft.cartItems[cartItemIndex].amount = 0
+        } else {
+          console.log(action.payload.item)
+          draft.cartItems[cartItemIndex].amount = action.payload.item.amount
+        }
+      })
+    }
     default: {
       return state
     }

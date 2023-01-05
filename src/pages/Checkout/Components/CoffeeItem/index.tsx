@@ -15,27 +15,38 @@ interface CoffeeItemProps {
 }
 
 export function CoffeeItem({ coffee }: CoffeeItemProps) {
-  const { cartItems, addItemToCart, removeItemFromCart } =
-    useContext(CartContext)
+  const {
+    cartItems,
+    addItemToCart,
+    removeItemFromCart,
+    replaceItemQuantityFromCart,
+  } = useContext(CartContext)
 
   const [cartItem] = cartItems.filter((item) => item.id === coffee.id)
 
   function handleUpdateCartItemValue(value: number) {
-    const updatedCartItem = {
-      ...cartItem,
-      amount: 1,
-    }
-    if (value > cartItem.amount) {
-      addItemToCart(updatedCartItem)
-    } else if (value < cartItem.amount) {
-      removeItemFromCart(updatedCartItem)
+    if (
+      Math.max(value, cartItem.amount) - Math.min(value, cartItem.amount) !==
+      1
+    ) {
+      replaceItemQuantityFromCart({ ...cartItem, amount: value })
+    } else {
+      const updatedCartItem = {
+        ...cartItem,
+        amount: 1,
+      }
+      if (value > cartItem.amount) {
+        addItemToCart(updatedCartItem)
+      } else if (value < cartItem.amount) {
+        removeItemFromCart(updatedCartItem)
+      }
     }
   }
 
   function handleRemoveItem() {
     const updatedCartItem = {
       ...cartItem,
-      amount: -1,
+      amount: 0,
     }
     removeItemFromCart(updatedCartItem)
   }
