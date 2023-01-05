@@ -32,7 +32,7 @@ export function cartReducer(state: CartState, action: any) {
         const isCartValueLowerThanPayload =
           draft.cartItems[cartItemIndex].amount - action.payload.item.amount <=
           0
-        if (isCartValueLowerThanPayload) {
+        if (isCartValueLowerThanPayload || action.payload.item.amount <= 0) {
           draft.cartItems.splice(cartItemIndex, 1)
         } else {
           draft.cartItems[cartItemIndex].amount -= action.payload.item.amount

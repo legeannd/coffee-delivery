@@ -21,7 +21,6 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
   const [cartItem] = cartItems.filter((item) => item.id === coffee.id)
 
   function handleUpdateCartItemValue(value: number) {
-    console.log(value)
     const updatedCartItem = {
       ...cartItem,
       amount: 1,
@@ -31,6 +30,14 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
     } else if (value < cartItem.amount) {
       removeItemFromCart(updatedCartItem)
     }
+  }
+
+  function handleRemoveItem() {
+    const updatedCartItem = {
+      ...cartItem,
+      amount: -1,
+    }
+    removeItemFromCart(updatedCartItem)
   }
 
   const image = `/assets/coffees/${coffee.image_name}`
@@ -47,7 +54,7 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
                 quantity={cartItem.amount}
                 setQuantity={handleUpdateCartItemValue}
               />
-              <RemoveButton>
+              <RemoveButton onClick={handleRemoveItem}>
                 <Trash size={16} />
                 Remover
               </RemoveButton>

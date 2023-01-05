@@ -1,4 +1,5 @@
 import { Minus, Plus } from 'phosphor-react'
+import { BaseSyntheticEvent, useState } from 'react'
 import { QuantityInputContainer } from './styles'
 
 interface QuantityInputProps {
@@ -12,11 +13,26 @@ export function QuantityInput({
   quantity = 0,
   setQuantity,
 }: QuantityInputProps) {
+  const [itemQuantity, setItemQuantity] = useState(quantity)
+
+  function setParentAndComponentQuantity(value: number) {
+    setItemQuantity(value)
+    setQuantity(value)
+  }
+
   function handleChangeQuantity(buttonType: string) {
-    if (buttonType === 'minus' && quantity > 0) {
-      setQuantity(quantity - 1)
+    if (buttonType === 'minus' && itemQuantity > 0) {
+      setParentAndComponentQuantity(itemQuantity - 1)
     } else if (buttonType === 'plus') {
-      setQuantity(quantity + 1)
+      setParentAndComponentQuantity(itemQuantity + 1)
+    }
+  }
+
+  function handleChangeQuantityFromInput(e: BaseSyntheticEvent) {
+    if (e.target.value < 0) {
+      setParentAndComponentQuantity(0)
+    } else {
+      setParentAndComponentQuantity(Number(e.target.value))
     }
   }
 
@@ -28,7 +44,13 @@ export function QuantityInput({
       >
         <Minus size={14} weight="fill" />
       </button>
-      <input type="number" placeholder="1" id="quantity" value={quantity} />
+      <input
+        type="number"
+        placeholder="1"
+        id="quantity"
+        value={itemQuantity}
+        onChange={handleChangeQuantityFromInput}
+      />
       <button onClick={() => handleChangeQuantity('plus')}>
         <Plus size={14} weight="fill" />
       </button>
