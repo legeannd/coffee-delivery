@@ -17,6 +17,9 @@ export const QuantityInputContainer = styled.div<QuantityInputProps>`
   color: ${(props) => props.theme['base-text']};
   font-size: 1rem;
 
+  input {
+    color: ${(props) => props.theme['base-text']};
+  }
   button {
     background: transparent;
     border: 0;
