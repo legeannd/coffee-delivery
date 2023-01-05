@@ -19,6 +19,9 @@ export function QuantityInput({
       setQuantity(quantity + 1)
     }
   }
+
+  console.log(quantity)
+
   return (
     <QuantityInputContainer color={color}>
       <button

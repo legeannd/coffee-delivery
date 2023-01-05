@@ -30,7 +30,6 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   const { cartItems } = cartState
 
   function addItemToCart(data: CreateCartItemData) {
-    console.log(data)
     dispatch(addItemToCartAction(data))
   }
 

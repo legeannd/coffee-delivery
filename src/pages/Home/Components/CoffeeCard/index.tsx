@@ -14,7 +14,7 @@ import { QuantityInput } from '../../../../components/QuantityInput'
 import { useContext, useState } from 'react'
 import { CartContext } from '../../../../contexts/CartContext'
 
-interface CoffeeProps {
+export interface CoffeeProps {
   id: string
   name: string
   description: string

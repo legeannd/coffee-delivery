@@ -1,5 +1,7 @@
 import { Bank, CreditCard, MapPin, Money } from 'phosphor-react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { CartContext } from '../../contexts/CartContext'
 import { CoffeeItem } from './Components/CoffeeItem'
 import { Input } from './Components/Input'
 import {
@@ -22,7 +24,11 @@ import {
   LabelTitle,
 } from './styles'
 
+import coffeeList from '../../assets/coffee-list.json'
+
 export function Checkout() {
+  const { cartItems } = useContext(CartContext)
+
   const navigate = useNavigate()
   function handleNavigateToSuccessPage() {
     navigate('/checkout/success')
@@ -85,8 +91,17 @@ export function Checkout() {
       <SelectedCoffeeContainer>
         <CheckoutTitle>Cafés selecionados</CheckoutTitle>
         <CoffeeBaseContainer>
-          <CoffeeItem />
-          <CoffeeItem />
+          <>
+            {coffeeList.map((item) => {
+              return cartItems.map((cartItem) => {
+                if (cartItem.id === item.id) {
+                  return <CoffeeItem key={item.id} coffee={item} />
+                } else {
+                  return ''
+                }
+              })
+            })}
+          </>
           <TotalValueContainer>
             <TotalValueRow>
               <LabelText>Total de itens</LabelText>
