@@ -20,8 +20,6 @@ export function QuantityInput({
     }
   }
 
-  console.log(quantity)
-
   return (
     <QuantityInputContainer color={color}>
       <button

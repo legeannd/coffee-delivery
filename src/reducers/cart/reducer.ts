@@ -25,7 +25,19 @@ export function cartReducer(state: CartState, action: any) {
       })
     }
     case ActionTypes.REMOVE_ITEM_FROM_CART: {
-      return state
+      const cartItemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.item.id,
+      )
+      return produce(state, (draft) => {
+        const isCartValueLowerThanPayload =
+          draft.cartItems[cartItemIndex].amount - action.payload.item.amount <=
+          0
+        if (isCartValueLowerThanPayload) {
+          draft.cartItems.splice(cartItemIndex, 1)
+        } else {
+          draft.cartItems[cartItemIndex].amount -= action.payload.item.amount
+        }
+      })
     }
     default: {
       return state

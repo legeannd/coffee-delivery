@@ -15,9 +15,23 @@ interface CoffeeItemProps {
 }
 
 export function CoffeeItem({ coffee }: CoffeeItemProps) {
-  const { cartItems } = useContext(CartContext)
+  const { cartItems, addItemToCart, removeItemFromCart } =
+    useContext(CartContext)
 
-  const [{ amount }] = cartItems.filter((item) => item.id === coffee.id)
+  const [cartItem] = cartItems.filter((item) => item.id === coffee.id)
+
+  function handleUpdateCartItemValue(value: number) {
+    console.log(value)
+    const updatedCartItem = {
+      ...cartItem,
+      amount: 1,
+    }
+    if (value > cartItem.amount) {
+      addItemToCart(updatedCartItem)
+    } else if (value < cartItem.amount) {
+      removeItemFromCart(updatedCartItem)
+    }
+  }
 
   const image = `/assets/coffees/${coffee.image_name}`
 
@@ -29,7 +43,10 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
           <div className="title-align">
             <span>{coffee.name}</span>
             <div>
-              <QuantityInput quantity={amount} />
+              <QuantityInput
+                quantity={cartItem.amount}
+                setQuantity={handleUpdateCartItemValue}
+              />
               <RemoveButton>
                 <Trash size={16} />
                 Remover
