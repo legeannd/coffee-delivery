@@ -1,5 +1,5 @@
 import { Bank, CreditCard, MapPin, Money } from 'phosphor-react'
-import { useContext } from 'react'
+import { useCallback, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CartContext } from '../../contexts/CartContext'
 import { CoffeeItem } from './Components/CoffeeItem'
@@ -33,6 +33,30 @@ export function Checkout() {
   function handleNavigateToSuccessPage() {
     navigate('/checkout/success')
   }
+
+  function handleNavigateToHomePage() {
+    navigate('/')
+  }
+
+  const totalItemValue = cartItems.reduce((acc, value) => {
+    if (cartItems.length !== 0) {
+      const currentCoffee = coffeeList.find((item) => item.id === value.id)
+      return acc + value.amount * Number(currentCoffee?.price)
+    } else {
+      return 0
+    }
+  }, 0)
+
+  const shippingValue = Number(3.5)
+  const totalValueWithShipping = totalItemValue + shippingValue
+
+  const formatPriceValue = useCallback((value: number) => {
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    })
+    return formatter.format(value)
+  }, [])
 
   return (
     <CheckoutContainer>
@@ -102,23 +126,43 @@ export function Checkout() {
               })
             })}
           </>
-          <TotalValueContainer>
-            <TotalValueRow>
-              <LabelText>Total de itens</LabelText>
-              <LabelValue>R$ 29,70</LabelValue>
-            </TotalValueRow>
-            <TotalValueRow>
-              <LabelText>Entrega</LabelText>
-              <LabelValue>R$ 3,50</LabelValue>
-            </TotalValueRow>
-            <TotalValueRow>
-              <LabelTitle>Total</LabelTitle>
-              <LabelTitle>R$ 33,20</LabelTitle>
-            </TotalValueRow>
-          </TotalValueContainer>
-          <ConfirmOrderButton onClick={handleNavigateToSuccessPage}>
-            Confirmar pedido
-          </ConfirmOrderButton>
+          {cartItems.length > 0 ? (
+            <>
+              <TotalValueContainer>
+                <TotalValueRow>
+                  <LabelText>Total de itens</LabelText>
+                  <LabelValue>{formatPriceValue(totalItemValue)}</LabelValue>
+                </TotalValueRow>
+                <TotalValueRow>
+                  <LabelText>Entrega</LabelText>
+                  <LabelValue>{formatPriceValue(shippingValue)}</LabelValue>
+                </TotalValueRow>
+                <TotalValueRow>
+                  <LabelTitle>Total</LabelTitle>
+                  <LabelTitle>
+                    {formatPriceValue(totalValueWithShipping)}
+                  </LabelTitle>
+                </TotalValueRow>
+              </TotalValueContainer>
+              <ConfirmOrderButton onClick={handleNavigateToSuccessPage}>
+                Confirmar pedido
+              </ConfirmOrderButton>
+            </>
+          ) : (
+            <>
+              <TotalValueContainer>
+                <TotalValueRow>
+                  <LabelTitle>
+                    Seu carrinho está vazio, adicione itens para continuar a
+                    compra
+                  </LabelTitle>
+                </TotalValueRow>
+              </TotalValueContainer>
+              <ConfirmOrderButton onClick={handleNavigateToHomePage}>
+                Adicionar itens ao carrinho
+              </ConfirmOrderButton>
+            </>
+          )}
         </CoffeeBaseContainer>
       </SelectedCoffeeContainer>
     </CheckoutContainer>

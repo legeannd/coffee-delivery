@@ -3,6 +3,6 @@ import { InputContainer } from './styles'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>
 
-export function Input({ size, ...rest }: InputProps) {
+export function Input({ ...rest }: InputProps) {
   return <InputContainer {...rest} />
 }
