@@ -35,10 +35,12 @@ import { useQuery } from 'react-query'
 
 export function Checkout() {
   const [cep, setCEP] = useState('')
-  const { cartItems, address, setCurrentAddress } = useContext(CartContext)
+  const { cartItems, address, emptyCart, setCurrentAddress } =
+    useContext(CartContext)
 
   const navigate = useNavigate()
   function handleNavigateToSuccessPage() {
+    emptyCart()
     navigate('/checkout/success')
   }
 

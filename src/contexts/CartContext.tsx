@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import {
   addItemToCartAction,
+  emptyCartAction,
   removeItemFromCartAction,
   replaceItemQuantityFromCartAction,
   setCurrentAddressAction,
@@ -18,6 +19,7 @@ interface CartContextType {
   addItemToCart: (cartItem: CreateCartItemData) => void
   removeItemFromCart: (cartItem: CreateCartItemData) => void
   replaceItemQuantityFromCart: (cartItem: CreateCartItemData) => void
+  emptyCart: () => void
   setCurrentAddress: (address: AddressData) => void
 }
 
@@ -64,6 +66,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(replaceItemQuantityFromCartAction(data))
   }
 
+  function emptyCart() {
+    dispatch(emptyCartAction())
+  }
+
   function setCurrentAddress(data: AddressData) {
     dispatch(setCurrentAddressAction(data))
   }
@@ -82,6 +88,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         addItemToCart,
         removeItemFromCart,
         replaceItemQuantityFromCart,
+        emptyCart,
         setCurrentAddress,
       }}
     >

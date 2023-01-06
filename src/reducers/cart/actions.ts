@@ -5,6 +5,7 @@ export enum ActionTypes {
   ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART',
   REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART',
   REPLACE_ITEM_QUANTITY_FROM_CART = 'REPLACE_ITEM_QUANTITY_FROM_CART',
+  EMPTY_CART_ACTION = 'EMPTY_CART_ACTION',
   SET_CURRENT_ADDRESS = 'SET_CURRENT_ADDRESS',
 }
 
@@ -32,6 +33,12 @@ export function replaceItemQuantityFromCartAction(item: CartItem) {
     payload: {
       item,
     },
+  }
+}
+
+export function emptyCartAction() {
+  return {
+    type: ActionTypes.EMPTY_CART_ACTION,
   }
 }
 

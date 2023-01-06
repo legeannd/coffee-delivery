@@ -61,6 +61,11 @@ export function cartReducer(state: CartState, action: any) {
         }
       })
     }
+    case ActionTypes.EMPTY_CART_ACTION: {
+      return produce(state, (draft) => {
+        draft.cartItems = []
+      })
+    }
     case ActionTypes.SET_CURRENT_ADDRESS: {
       return produce(state, (draft) => {
         draft.address = action.payload.item
