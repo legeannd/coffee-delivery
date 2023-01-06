@@ -34,7 +34,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     cartReducer,
     {
       cartItems: [],
-      address: {},
+      address: {
+        bairro: '',
+        cep: '',
+        complemento: '',
+        localidade: '',
+        logradouro: '',
+        uf: '',
+      },
     },
     () => {
       const storedStateAsJSON = localStorage.getItem(
@@ -47,7 +54,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
       return {
         cartItems: [],
-        address: {},
+        address: {
+          bairro: '',
+          cep: '',
+          complemento: '',
+          localidade: '',
+          logradouro: '',
+          uf: '',
+        },
       }
     },
   )

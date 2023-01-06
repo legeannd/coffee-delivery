@@ -34,10 +34,8 @@ export function Header() {
         </NavLink>
         <NavLink to="#">
           <MapPin size={22} weight="fill" />
-          {address.localidade ? (
-            <span>
-              {address.localidade}, {address.uf}
-            </span>
+          {address.localidade !== '' ? (
+            <span>{`${address?.localidade}, ${address?.uf}`}</span>
           ) : (
             ''
           )}
