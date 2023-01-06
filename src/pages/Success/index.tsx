@@ -1,5 +1,7 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useContext } from 'react'
 import deliveryImg from '../../assets/delivery.png'
+import { CartContext } from '../../contexts/CartContext'
 import {
   DetailHighlighted,
   DetailRow,
@@ -12,6 +14,8 @@ import {
   SuccessTitleContainer,
 } from './styles'
 export function Success() {
+  const { address } = useContext(CartContext)
+
   return (
     <SuccessContainer>
       <OrderOverviewContainer>
@@ -30,10 +34,16 @@ export function Success() {
               <DetailText>
                 Entrega em{' '}
                 <DetailHighlighted>
-                  Rua João Daniel Martinelli, 102
+                  {address?.logradouro || 'Não informado'}
                 </DetailHighlighted>
               </DetailText>
-              <DetailText>Farrapos - Porto Alegre, RS</DetailText>
+              {address ? (
+                <DetailText>
+                  {address.bairro} - {address.localidade}, {address.uf}
+                </DetailText>
+              ) : (
+                <DetailText>Não informado</DetailText>
+              )}
             </div>
           </DetailRow>
           <DetailRow>

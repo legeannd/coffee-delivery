@@ -9,7 +9,7 @@ import { CartContext } from '../../contexts/CartContext'
 import { ThemeContext } from '../../contexts/ThemeContext'
 
 export function Header() {
-  const { cartItems } = useContext(CartContext)
+  const { cartItems, address } = useContext(CartContext)
   const { theme, switchTheme } = useContext(ThemeContext)
 
   const cartItemsAmount = cartItems.reduce((acc, item) => {
@@ -34,7 +34,7 @@ export function Header() {
         </NavLink>
         <NavLink to="#">
           <MapPin size={22} weight="fill" />
-          <span>Porto Alegre, RS</span>
+          <span>{address && `${address?.localidade}, ${address?.uf}`}</span>
         </NavLink>
         <NavLink to="/checkout" className="cart">
           <ShoppingCart size={22} weight="fill" />

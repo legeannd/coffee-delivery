@@ -3,8 +3,9 @@ import {
   addItemToCartAction,
   removeItemFromCartAction,
   replaceItemQuantityFromCartAction,
+  setCurrentAddressAction,
 } from '../reducers/cart/actions'
-import { CartItem, cartReducer } from '../reducers/cart/reducer'
+import { AddressData, CartItem, cartReducer } from '../reducers/cart/reducer'
 
 interface CreateCartItemData {
   id: string
@@ -13,9 +14,11 @@ interface CreateCartItemData {
 
 interface CartContextType {
   cartItems: CartItem[]
+  address: AddressData
   addItemToCart: (cartItem: CreateCartItemData) => void
   removeItemFromCart: (cartItem: CreateCartItemData) => void
   replaceItemQuantityFromCart: (cartItem: CreateCartItemData) => void
+  setCurrentAddress: (address: AddressData) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -29,6 +32,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     cartReducer,
     {
       cartItems: [],
+      address: {},
     },
     () => {
       const storedStateAsJSON = localStorage.getItem(
@@ -41,11 +45,12 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
       return {
         cartItems: [],
+        address: {},
       }
     },
   )
 
-  const { cartItems } = cartState
+  const { cartItems, address } = cartState
 
   function addItemToCart(data: CreateCartItemData) {
     dispatch(addItemToCartAction(data))
@@ -59,6 +64,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(replaceItemQuantityFromCartAction(data))
   }
 
+  function setCurrentAddress(data: AddressData) {
+    dispatch(setCurrentAddressAction(data))
+  }
+
   useEffect(() => {
     const stateJSON = JSON.stringify(cartState)
 
@@ -69,9 +78,11 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     <CartContext.Provider
       value={{
         cartItems,
+        address,
         addItemToCart,
         removeItemFromCart,
         replaceItemQuantityFromCart,
+        setCurrentAddress,
       }}
     >
       {children}

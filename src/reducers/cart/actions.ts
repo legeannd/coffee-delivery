@@ -1,10 +1,11 @@
-import { CartItem } from './reducer'
+import { AddressData, CartItem } from './reducer'
 
 /* eslint-disable no-unused-vars */
 export enum ActionTypes {
   ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART',
   REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART',
   REPLACE_ITEM_QUANTITY_FROM_CART = 'REPLACE_ITEM_QUANTITY_FROM_CART',
+  SET_CURRENT_ADDRESS = 'SET_CURRENT_ADDRESS',
 }
 
 export function addItemToCartAction(item: CartItem) {
@@ -28,6 +29,15 @@ export function removeItemFromCartAction(item: CartItem) {
 export function replaceItemQuantityFromCartAction(item: CartItem) {
   return {
     type: ActionTypes.REPLACE_ITEM_QUANTITY_FROM_CART,
+    payload: {
+      item,
+    },
+  }
+}
+
+export function setCurrentAddressAction(item: AddressData) {
+  return {
+    type: ActionTypes.SET_CURRENT_ADDRESS,
     payload: {
       item,
     },

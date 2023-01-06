@@ -6,8 +6,18 @@ export interface CartItem {
   amount: number
 }
 
+export interface AddressData {
+  bairro: string
+  cep: string
+  complemento: string
+  localidade: string
+  logradouro: string
+  uf: string
+}
+
 interface CartState {
   cartItems: CartItem[]
+  address: AddressData
 }
 
 export function cartReducer(state: CartState, action: any) {
@@ -47,9 +57,13 @@ export function cartReducer(state: CartState, action: any) {
         if (action.payload.item.amount <= 0) {
           draft.cartItems[cartItemIndex].amount = 0
         } else {
-          console.log(action.payload.item)
           draft.cartItems[cartItemIndex].amount = action.payload.item.amount
         }
+      })
+    }
+    case ActionTypes.SET_CURRENT_ADDRESS: {
+      return produce(state, (draft) => {
+        draft.address = action.payload.item
       })
     }
     default: {

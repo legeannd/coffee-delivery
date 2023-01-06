@@ -1,5 +1,11 @@
 import { Bank, CreditCard, MapPin, Money } from 'phosphor-react'
-import { useCallback, useContext } from 'react'
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CartContext } from '../../contexts/CartContext'
 import { CoffeeItem } from './Components/CoffeeItem'
@@ -25,9 +31,11 @@ import {
 } from './styles'
 
 import coffeeList from '../../assets/coffee-list.json'
+import { useQuery } from 'react-query'
 
 export function Checkout() {
-  const { cartItems } = useContext(CartContext)
+  const [cep, setCEP] = useState('')
+  const { cartItems, address, setCurrentAddress } = useContext(CartContext)
 
   const navigate = useNavigate()
   function handleNavigateToSuccessPage() {
@@ -36,6 +44,14 @@ export function Checkout() {
 
   function handleNavigateToHomePage() {
     navigate('/')
+  }
+
+  function handleChangeCEP(e: ChangeEvent<HTMLInputElement>) {
+    const currentCEPValue = String(e.target.value).trim().replace('-', '')
+
+    if (currentCEPValue.length === 8) {
+      setCEP(currentCEPValue)
+    }
   }
 
   const totalItemValue = cartItems.reduce((acc, value) => {
@@ -58,6 +74,20 @@ export function Checkout() {
     return formatter.format(value)
   }, [])
 
+  const { data } = useQuery(['cep', cep], () => {
+    if (cep !== '') {
+      return fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => response.json())
+        .then((data) => data)
+    }
+  })
+
+  useEffect(() => {
+    if (data) {
+      setCurrentAddress(data)
+    }
+  }, [data, setCurrentAddress])
+
   return (
     <CheckoutContainer>
       <CompleteOrderContainer>
@@ -71,18 +101,27 @@ export function Checkout() {
             </div>
           </LabelContainer>
           <AddressInputContainer>
-            <Input placeholder="CEP" className="size-3" />
-            <Input placeholder="Rua" />
+            <Input
+              placeholder="CEP"
+              className="size-3"
+              defaultValue={address.cep}
+              onChange={handleChangeCEP}
+            />
+            <Input placeholder="Rua" value={address?.logradouro} />
             <div className="input-flex">
               <Input placeholder="Número" className="size-3" />
               <div className="suffix">
-                <Input placeholder="Complemento" />
+                <Input placeholder="Complemento" value={address?.complemento} />
               </div>
             </div>
             <div className="input-flex">
-              <Input placeholder="Bairro" className="size-3" />
-              <Input placeholder="Cidade" />
-              <Input placeholder="UF" className="size-1" />
+              <Input
+                placeholder="Bairro"
+                className="size-3"
+                value={address?.bairro}
+              />
+              <Input placeholder="Cidade" value={address?.localidade} />
+              <Input placeholder="UF" className="size-1" value={address?.uf} />
             </div>
           </AddressInputContainer>
         </BaseContainer>
