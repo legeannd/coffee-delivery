@@ -9,6 +9,12 @@ export const HeroContainer = styled.main`
   gap: 3.5rem;
   padding-bottom: 6.75rem;
 
+  @media (max-width: 1024px) {
+    img {
+      display: none;
+    }
+  }
+
   .info {
     display: flex;
     flex-direction: column;
@@ -25,6 +31,10 @@ export const HeroContainer = styled.main`
         font-size: 3rem;
         line-height: 130%;
         color: ${(props) => props.theme['base-title']};
+
+        @media (max-width: 480px) {
+          font-size: 2rem;
+        }
       }
 
       p {
@@ -37,6 +47,10 @@ export const HeroContainer = styled.main`
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.25rem 0;
+
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+      }
 
       span {
         display: flex;
@@ -93,8 +107,12 @@ export const CoffeeSelectionContainer = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 2.5rem 2rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
     }
   }
 `

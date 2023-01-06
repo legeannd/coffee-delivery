@@ -14,6 +14,11 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
     display: flex;
     gap: 0.75rem;
 
+    @media (max-width: 480px) {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
     a {
       display: flex;
       align-items: center;
