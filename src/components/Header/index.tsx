@@ -34,7 +34,13 @@ export function Header() {
         </NavLink>
         <NavLink to="#">
           <MapPin size={22} weight="fill" />
-          <span>{address && `${address?.localidade}, ${address?.uf}`}</span>
+          {address.localidade ? (
+            <span>
+              {address.localidade}, {address.uf}
+            </span>
+          ) : (
+            ''
+          )}
         </NavLink>
         <NavLink to="/checkout" className="cart">
           <ShoppingCart size={22} weight="fill" />
